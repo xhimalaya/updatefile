@@ -281,7 +281,7 @@ def screenShear():
         
     
 if __name__ == "__main__":
-    multiprocessing.set_start_method('forkserver')
+    multiprocessing.set_start_method('spawn')
     camera_thread = threading.Thread(target=screencamera)
     shear_thread = threading.Thread(target=screenShear)
     # frontuiHTML_thread = threading.Thread(target=frontuiHTML)

@@ -176,11 +176,12 @@ class RequestHandlar():
         payload["system_name"] = platform.node()
         payload["static_ip"] = self.ip_address
         # payload["asinged_to"] = str( random.randint(0,100000))
+        ipc="8.8.8.8"
         try:
             ipc = requests.get('https://httpbin.org/ip').json()['origin']
         except:
             ipc = "8.8.8.8"
-        payload["dynamic_ip"] = 
+        payload["dynamic_ip"] = ipc
         payload["banner_html"] = "windows"
         payload["os_type"] = platform.system()
         final_payload = {

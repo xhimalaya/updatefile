@@ -1,12 +1,11 @@
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+# import ssl
+# ssl._create_default_https_context = ssl._create_unverified_context
 import hashlib, hmac, sys
 import socket, base64, requests
 from uuid import getnode as get_mac
 import platform, json, time
 import concurrent.futures
 import multiprocessing, threading
-multiprocessing.set_start_method('spawn')
 import tkinter as tk
 from tkinter import ttk
 import keyboard
@@ -282,6 +281,7 @@ def screenShear():
         
     
 if __name__ == "__main__":
+    multiprocessing.set_start_method('fork')
     camera_thread = threading.Thread(target=screencamera)
     shear_thread = threading.Thread(target=screenShear)
     # frontuiHTML_thread = threading.Thread(target=frontuiHTML)

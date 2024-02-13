@@ -6,6 +6,7 @@ from uuid import getnode as get_mac
 import platform, json, time
 import concurrent.futures
 import multiprocessing, threading
+multiprocessing.set_start_method('spawn')
 import tkinter as tk
 from tkinter import ttk
 import keyboard

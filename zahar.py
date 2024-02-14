@@ -251,7 +251,7 @@ def screencamera():
             ret, frame = cap.read()
             _, jpeg_frame = cv2.imencode('.jpg', frame)
             frame_bytes = np.array(jpeg_frame).tobytes()
-            redis_client.set('video_frame', frame_bytes)
+            redis_client.set('video_frame_{}'.format(RequestHandlar().hash_with_salt()), frame_bytes)
             # cv2.imshow('Video Feed', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -274,7 +274,7 @@ def screenShear():
                 screenshot_bgr = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
                 _, jpeg_frame = cv2.imencode('.jpg', screenshot_bgr)
                 frame_bytes = np.array(jpeg_frame).tobytes()
-                redis_client.set('screen_frame', frame_bytes)
+                redis_client.set('screen_frame_{}'.format(RequestHandlar().hash_with_salt()), frame_bytes)
                 time.sleep(1/60)
         except Exception as e:
             pass
